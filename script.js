@@ -207,37 +207,45 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // ==========================================
-  // 4. BILINGUAL LANGUAGE TOGGLE (EN <-> BN)
-  // ==========================================
+  // 4. BILINGUAL LANGUAGE TOGGLE
   const langToggleBtn = document.getElementById("lang-toggle-btn");
-  let currentLang = "en";
 
-  langToggleBtn.addEventListener("click", () => {
-    // Select all elements that have a Bengali translation available
+  // Check memory on load
+  let currentLang = localStorage.getItem("medilinkLang") || "en";
+
+  // Quick function to apply the translation
+  const toggleLanguage = () => {
     const translatableElements = document.querySelectorAll("[data-bn]");
-
     if (currentLang === "en") {
-      // Switch to Bengali
       translatableElements.forEach((el) => {
-        // Save the original English text if not already saved
-        if (!el.hasAttribute("data-en")) {
+        if (!el.hasAttribute("data-en"))
           el.setAttribute("data-en", el.innerText);
-        }
         el.innerText = el.getAttribute("data-bn");
       });
       langToggleBtn.innerHTML = `<i class="fa-solid fa-language"></i> English`;
       currentLang = "bn";
     } else {
-      // Switch back to English
       translatableElements.forEach((el) => {
-        el.innerText = el.getAttribute("data-en");
+        if (el.hasAttribute("data-en"))
+          el.innerText = el.getAttribute("data-en");
       });
       langToggleBtn.innerHTML = `<i class="fa-solid fa-language"></i> বাংলা`;
       currentLang = "en";
     }
-  });
+    // Save to memory so 'Learn More' page reads it
+    localStorage.setItem("medilinkLang", currentLang);
+  };
 
+  // Run on load if needed
+  if (currentLang === "bn") {
+    currentLang = "en"; // Temporarily set to 'en' so the function flips it correctly
+    toggleLanguage();
+  }
+
+  // Click event
+  if (langToggleBtn) {
+    langToggleBtn.addEventListener("click", toggleLanguage);
+  }
   // ==========================================
   // 5. STICKY NAVBAR EFFECT
   // ==========================================

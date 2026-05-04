@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Medilink AI - Modern Healthcare & Emergency Services Platform powered by Artificial Intelligence."
+    />
+    <title>Medilink AI | Intelligent Healthcare</title>
+
+    <!-- Google Fonts: Poppins (Premium Look) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <!-- Added class 'no-scroll' to prevent scrolling while on the intro screen -->
+  <body class="no-scroll">
+    <!-- ================= 0. INTRO / WELCOME OVERLAY ================= -->
+    <div id="intro-overlay" class="intro-overlay glass-section">
+      <div class="intro-content glass-card animate-scale-in">
+        <div class="intro-icon">
+          <!-- Clean Teal Icon -->
+          <i class="fa-solid fa-robot fa-3x text-primary"></i>
+        </div>
+        <h1 class="intro-title text-primary">Welcome to MEDILINK AI</h1>
+        <p class="intro-subtitle">
+          Please enter your details to personalize your experience.
+        </p>
+
+        <form id="intro-form" class="intro-form">
+          <div class="input-group">
+            <i class="fa-solid fa-user text-muted"></i>
+            <input
+              type="text"
+              id="user-name"
+              placeholder="Your Name"
+              required
+              autocomplete="off"
+            />
+          </div>
+          <div class="input-group">
+            <i class="fa-solid fa-calendar-days text-muted"></i>
+            <input
+              type="number"
+              id="user-age"
+              placeholder="Your Age"
+              required
+              min="1"
+              max="120"
+              autocomplete="off"
+            />
+          </div>
+
+          <!-- Textarea for the medical problem -->
+          <div class="input-group">
+            <i
+              class="fa-solid fa-comment-medical text-muted"
+              style="top: 20px; transform: none"
+            ></i>
+            <textarea
+              id="user-problem"
+              placeholder="What is your problem? (e.g., Heart ache, Fever, Cough)"
+              required
+              rows="3"
+              style="
+                width: 100%;
+                padding: 1rem 1rem 1rem 45px;
+                border-radius: 20px;
+                border: 2px solid var(--glass-border);
+                background: rgba(255, 255, 255, 0.7);
+                font-family: &quot;Poppins&quot;, sans-serif;
+                font-size: 1rem;
+                color: var(--text-main);
+                outline: none;
+                transition: var(--transition-fast);
+                resize: vertical;
+              "
+            ></textarea>
+          </div>
+
+          <!-- Buttons Group -->
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 0.8rem;
+              margin-top: 1.5rem;
+            "
+          >
+            <button
+              type="submit"
+              class="btn-primary w-100"
+              style="padding: 1rem; font-size: 1.1rem"
+            >
+              Start Experience
+              <i class="fa-solid fa-arrow-right" style="margin-left: 8px"></i>
+            </button>
+
+            <!-- Quick Emergency SOS Button -->
+            <button
+              type="button"
+              id="intro-sos-btn"
+              class="btn-outline w-100"
+              style="
+                padding: 1rem;
+                font-size: 1.1rem;
+                border-color: var(--danger-color);
+                color: var(--danger-color);
+              "
+            >
+              <i class="fa-solid fa-truck-medical"></i> Emergency SOS
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ================= MAIN WEBSITE CONTENT ================= -->
+    <div id="main-wrapper" class="main-wrapper hidden-initially">
+      <!-- ================= NAVBAR ================= -->
+      <header>
+        <nav class="navbar sticky-navbar glass-navbar">
+          <div class="container nav-container">
+            <!-- Logo -->
+            <div class="logo">
+              <a href="MEDBIOAIhome.html">
+                <i class="fa-solid fa-notes-medical text-primary"></i>
+                <span class="logo-text" data-bn="মেডিলিংক এআই"
+                  >MEDILINK AI</span
+                >
+              </a>
+            </div>
+
+            <!-- Navigation Links -->
+            <ul class="nav-links">
+              <li><a href="#hero" data-bn="হোম">Home</a></li>
+              <li>
+                <a href="#emergency" class="text-danger" data-bn="জরুরী অবস্থা"
+                  >Emergency</a
+                >
+              </li>
+              <li>
+                <a href="#doctor-search" data-bn="ডাক্তার খুঁজুন"
+                  >Find a Doctor</a
+                >
+              </li>
+              <li><a href="#pharmacy" data-bn="ফার্মেসি">Pharmacy</a></li>
+              <li>
+                <a href="#how-it-works" data-bn="কিভাবে কাজ করে"
+                  >How It Works</a
+                >
+              </li>
+
+              <!-- NEW: Edit My Needs / Update Profile Button -->
+              <li>
+                <a href="#" id="edit-profile-btn" data-bn="তথ্য আপডেট করুন">
+                  <i class="fa-solid fa-user-pen"></i> Edit My Needs
+                </a>
+              </li>
+
+              <!-- Language Toggle -->
+              <li style="display: flex; align-items: center">
+                <button
+                  id="lang-toggle-btn"
+                  class="btn-outline glass-btn"
+                  style="padding: 0.4rem 1rem; font-size: 0.9rem"
+                >
+                  <i class="fa-solid fa-language"></i> বাংলা
+                </button>
+              </li>
+            </ul>
+
+            <!-- Hamburger Menu Button -->
+            <div class="nav-actions">
+              <button
+                id="mobile-menu-btn"
+                class="mobile-menu-btn"
+                aria-label="Toggle Menu"
+              >
+                <i class="fa-solid fa-bars"></i>
+              </button>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <main>
+        <!-- 1. HERO SECTION -->
+        <section id="hero" class="hero-section section-padding">
+          <!-- Updated Layout Container -->
+          <div class="container hero-layout">
+            <!-- Hero Text Group -->
+            <div class="hero-text animate-on-scroll slide-in-left">
+              <span id="personalized-greeting" class="badge glass-badge"
+                >AI-Powered Healthcare</span
+              >
+
+              <h1
+                class="hero-headline"
+                data-bn="আপনার বুদ্ধিমান স্বাস্থ্য সঙ্গী, যেকোনো সময়, যেকোনো স্থানে।"
+              >
+                Your Intelligent Health Companion, Anytime, Anywhere.
+              </h1>
+              <p
+                class="hero-subtext"
+                data-bn="পরবর্তী প্রজন্মের চিকিৎসা সহায়তার অভিজ্ঞতা নিন। মেডিলিংক এআই আপনাকে বিশেষজ্ঞ ডাক্তার, জরুরি পরিষেবা এবং প্রয়োজনীয় ওষুধের সাথে নির্বিঘ্নে সংযুক্ত করে।"
+              >
+                Experience next-generation medical assistance. Medilink AI
+                connects you with expert doctors, emergency services, and
+                essential medicines seamlessly.
+              </p>
+
+              <p
+                id="hero-insight"
+                class="text-primary"
+                style="font-weight: 600; margin-bottom: 1rem; display: none"
+              ></p>
+            </div>
+
+            <!-- Hero Image Group (biohero.jpeg) -->
+            <div class="hero-visual animate-on-scroll slide-in-right">
+              <div
+                class="glass-card hero-image-wrapper"
+                style="
+                  padding: 1rem;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+              >
+                <img
+                  src="biohero.jpeg"
+                  alt="Medilink AI Healthcare"
+                  class="hero-img"
+                  style="
+                    border-radius: 12px;
+                    max-width: 100%;
+                    height: auto;
+                    box-shadow: var(--glass-shadow);
+                  "
+                />
+              </div>
+            </div>
+
+            <!-- Hero Buttons Group -->
+            <div class="hero-buttons animate-on-scroll slide-in-left">
+              <a href="doctor-finder.html"
+                ><button class="btn-primary" data-bn="একজন বিশেষজ্ঞ খুঁজুন">
+                  Find a Specialist
+                </button></a
+              >
+              <a href="Learn.html" target="_blank"
+                ><button class="btn-secondary glass-btn" data-bn="আরও জানুন">
+                  Learn More
+                </button></a
+              >
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. SOS / EMERGENCY SECTION -->
+        <section
+          id="emergency"
+          class="sos-section section-padding glass-section text-center"
+        >
+          <div class="container animate-on-scroll fade-in-up">
+            <h2
+              class="section-title text-danger"
+              data-bn="মেডিকেল ইমার্জেন্সি?"
+            >
+              Medical Emergency?
+            </h2>
+            <p
+              class="section-description"
+              data-bn="জরুরী সহায়তা পেতে নিচের বোতামটি চাপুন, যা আপনার নিকটস্থ অ্যাম্বুলেন্স এবং জরুরি পরিচিতদের কাছে সংকেত পাঠাবে।"
+            >
+              Press the button below to instantly broadcast an SOS alert to
+              nearby ambulances and emergency contacts.
+            </p>
+            <button
+              id="sos-button"
+              class="btn-emergency pulse-animation glass-card"
+              aria-label="Trigger Emergency SOS"
+            >
+              <span class="sos-icon"
+                ><i class="fa-solid fa-truck-medical fa-2x"></i
+              ></span>
+              <span class="sos-text" data-bn="এসওএস">SOS</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- 3. DOCTOR SEARCH SECTION -->
+        <section
+          id="doctor-search"
+          class="doctor-search-section section-padding bg-light"
+        >
+          <div class="container">
+            <div
+              class="section-header text-center animate-on-scroll fade-in-up"
+            >
+              <h2 class="section-title" data-bn="বিশেষজ্ঞ খুঁজুন">
+                Find a Specialist
+              </h2>
+              <p
+                class="section-description"
+                data-bn="আপনার সমস্যার উপর ভিত্তি করে সেরা ডাক্তারদের সাথে সংযোগ করুন।"
+              >
+                Connect with top-rated doctors based on your current condition.
+              </p>
+            </div>
+
+            <div id="doctor-list" class="specialty-grid mb-4">
+              <article
+                class="specialty-card glass-card animate-on-scroll stagger-item"
+                data-tags="heart ache chest pain attack cardiovascular cardiology"
+              >
+                <div class="card-icon">
+                  <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <h3 class="card-title" data-bn="হৃদরোগবিদ্যা">Cardiology</h3>
+                <a href="#" class="card-link" data-bn="ডাক্তার দেখুন"
+                  >View Doctors <i class="fa-solid fa-arrow-right"></i
+                ></a>
+              </article>
+              <article
+                class="specialty-card glass-card animate-on-scroll stagger-item"
+                data-tags="brain headache stroke nerve dizzy neurology"
+              >
+                <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
+                <h3 class="card-title" data-bn="স্নায়ুবিদ্যা">Neurology</h3>
+                <a href="#" class="card-link" data-bn="ডাক্তার দেখুন"
+                  >View Doctors <i class="fa-solid fa-arrow-right"></i
+                ></a>
+              </article>
+              <article
+                class="specialty-card glass-card animate-on-scroll stagger-item"
+                data-tags="child baby kid fever crying pediatrics"
+              >
+                <div class="card-icon"><i class="fa-solid fa-baby"></i></div>
+                <h3 class="card-title" data-bn="শিশুবিদ্যা">Pediatrics</h3>
+                <a href="#" class="card-link" data-bn="ডাক্তার দেখুন"
+                  >View Doctors <i class="fa-solid fa-arrow-right"></i
+                ></a>
+              </article>
+              <article
+                class="specialty-card glass-card animate-on-scroll stagger-item"
+                data-tags="tooth teeth pain bleeding gums dentistry"
+              >
+                <div class="card-icon"><i class="fa-solid fa-tooth"></i></div>
+                <h3 class="card-title" data-bn="দন্তচিকিৎসা">Dentistry</h3>
+                <a href="#" class="card-link" data-bn="ডাক্তার দেখুন"
+                  >View Doctors <i class="fa-solid fa-arrow-right"></i
+                ></a>
+              </article>
+            </div>
+
+            <div class="text-center animate-on-scroll fade-in-up mt-3">
+              <a href="doctor-finder.html"
+                ><button class="btn-outline" data-bn="আরও বিশেষজ্ঞ খুঁজুন">
+                  Find More Specialists
+                  <i class="fa-solid fa-user-doctor"></i></button
+              ></a>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. MEDICINE STORE / PHARMACY SECTION -->
+        <section id="pharmacy" class="pharmacy-section section-padding">
+          <div class="container">
+            <div
+              class="section-header d-flex align-between animate-on-scroll fade-in-up"
+            >
+              <div class="header-text">
+                <h2 class="section-title" data-bn="মেডিলিংক ফার্মেসি">
+                  Medilink Pharmacy
+                </h2>
+                <p
+                  class="section-description"
+                  data-bn="আপনার জন্য প্রস্তাবিত ওষুধগুলি হোম ডেলিভারির মাধ্যমে অর্ডার করুন।"
+                >
+                  Order recommended medicines online with fast home delivery.
+                </p>
+              </div>
+              <a href="#" class="btn-outline" data-bn="সব ওষুধ দেখুন"
+                >View All Medicines</a
+              >
+            </div>
+
+            <div
+              id="pharmacy-list"
+              class="carousel-container animate-on-scroll fade-in"
+            >
+              <article
+                class="product-card glass-card"
+                data-tags="fever headache pain bodyache hot"
+              >
+                <div class="product-image placeholder-img">
+                  <i class="fa-solid fa-pills fa-3x text-muted"></i>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title" data-bn="প্যারাসিটামল ৫০০ মি.গ্রা.">
+                    Paracetamol 500mg
+                  </h3>
+                  <p class="product-price">৳ ৩৫.০০</p>
+                  <button
+                    class="btn-primary add-to-cart w-100"
+                    data-bn="কার্টে যোগ করুন"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </article>
+
+              <article
+                class="product-card glass-card"
+                data-tags="heart ache attack chest pressure cardiology"
+              >
+                <div class="product-image placeholder-img">
+                  <i class="fa-solid fa-capsules fa-3x text-muted"></i>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title" data-bn="অ্যাসপিরিন ৭৫ মি.গ্রা.">
+                    Aspirin 75mg
+                  </h3>
+                  <p class="product-price">৳ ৪৫.০০</p>
+                  <button
+                    class="btn-primary add-to-cart w-100"
+                    data-bn="কার্টে যোগ করুন"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </article>
+
+              <article
+                class="product-card glass-card"
+                data-tags="clean wash infection hygiene virus bacteria"
+              >
+                <div class="product-image placeholder-img">
+                  <i class="fa-solid fa-pump-medical fa-3x text-muted"></i>
+                </div>
+                <div class="product-info">
+                  <h3
+                    class="product-title"
+                    data-bn="হ্যান্ড স্যানিটাইজার ২৫০ মি.লি."
+                  >
+                    Hand Sanitizer 250ml
+                  </h3>
+                  <p class="product-price">৳ ১২০.০০</p>
+                  <button
+                    class="btn-primary add-to-cart w-100"
+                    data-bn="কার্টে যোগ করুন"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </article>
+
+              <article
+                class="product-card glass-card"
+                data-tags="cut bleed injury accident blood bandage"
+              >
+                <div class="product-image placeholder-img">
+                  <i class="fa-solid fa-kit-medical fa-3x text-muted"></i>
+                </div>
+                <div class="product-info">
+                  <h3 class="product-title" data-bn="ফার্স্ট এইড বক্স">
+                    First Aid Kit
+                  </h3>
+                  <p class="product-price">৳ ৮৫০.০০</p>
+                  <button
+                    class="btn-primary add-to-cart w-100"
+                    data-bn="কার্টে যোগ করুন"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. HOW IT WORKS SECTION -->
+        <section
+          id="how-it-works"
+          class="how-it-works-section section-padding bg-light"
+        >
+          <div class="container">
+            <div
+              class="section-header text-center animate-on-scroll fade-in-up"
+            >
+              <h2 class="section-title" data-bn="কিভাবে মেডিলিংক এআই কাজ করে">
+                How Medilink AI Works
+              </h2>
+              <p
+                class="section-description"
+                data-bn="আপনার স্বাস্থ্যকর জীবনের যাত্রা তিনটি সহজ ধাপে।"
+              >
+                Your journey to a healthier life in three simple steps.
+              </p>
+            </div>
+            <div class="steps-container">
+              <div class="step-card glass-card animate-on-scroll stagger-item">
+                <div class="step-number text-primary">01</div>
+                <h3 class="step-title" data-bn="আপনার তথ্য দিন">
+                  Enter Your Details
+                </h3>
+                <p
+                  class="step-description"
+                  data-bn="আপনার প্রাথমিক তথ্য দিয়ে ব্যক্তিগতকৃত এআই অভিজ্ঞতা শুরু করুন।"
+                >
+                  Your personalized AI experience begins with your basic info.
+                </p>
+              </div>
+              <div class="step-card glass-card animate-on-scroll stagger-item">
+                <div class="step-number text-primary">02</div>
+                <h3 class="step-title" data-bn="এআই রোগ নির্ণয় ও ম্যাচিং">
+                  AI Diagnosis & Match
+                </h3>
+                <p
+                  class="step-description"
+                  data-bn="আমাদের এআই আপনার উপসর্গগুলি বিশ্লেষণ করে এবং সাথে সাথে সঠিক বিশেষজ্ঞের সাথে সংযুক্ত করে।"
+                >
+                  Our AI analyzes your symptoms and connects you to the right
+                  specialist instantly.
+                </p>
+              </div>
+              <div class="step-card glass-card animate-on-scroll stagger-item">
+                <div class="step-number text-primary">03</div>
+                <h3 class="step-title" data-bn="তাত্ক্ষণিক চিকিৎসা ও ডেলিভারি">
+                  Instant Care & Delivery
+                </h3>
+                <p
+                  class="step-description"
+                  data-bn="ভিডিও কল করুন, ডিজিটাল প্রেসক্রিপশন পান এবং আপনার দোরগোড়ায় ওষুধ গ্রহণ করুন।"
+                >
+                  Consult via video, get digital prescriptions, and receive
+                  medicines at your doorstep.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. STATS SECTION -->
+        <section id="stats" class="stats-section section-padding glass-section">
+          <div class="container">
+            <div class="stats-container grid-four-cols">
+              <div
+                class="stat-item glass-card text-center animate-on-scroll stagger-item"
+              >
+                <div class="stat-icon">
+                  <i class="fa-solid fa-user-doctor"></i>
+                </div>
+                <div class="counter-number" data-target="500">0</div>
+                <p class="stat-label" data-bn="সার্টিফাইড ডাক্তার">
+                  Certified Doctors
+                </p>
+              </div>
+              <div
+                class="stat-item glass-card text-center animate-on-scroll stagger-item"
+              >
+                <div class="stat-icon">
+                  <i class="fa-solid fa-face-smile"></i>
+                </div>
+                <div class="counter-number" data-target="15000">0</div>
+                <p class="stat-label" data-bn="সন্তুষ্ট রোগী">Happy Patients</p>
+              </div>
+              <div
+                class="stat-item glass-card text-center animate-on-scroll stagger-item"
+              >
+                <div class="stat-icon">
+                  <i class="fa-solid fa-hospital"></i>
+                </div>
+                <div class="counter-number" data-target="120">0</div>
+                <p class="stat-label" data-bn="অংশীদার হাসপাতাল">
+                  Partner Hospitals
+                </p>
+              </div>
+              <div
+                class="stat-item glass-card text-center animate-on-scroll stagger-item"
+              >
+                <div class="stat-icon">
+                  <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="counter-number" data-target="24">0</div>
+                <p class="stat-label" data-bn="ঘণ্টা জরুরি সেবা">
+                  Hours Emergency
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- ================= FOOTER ================= -->
+      <footer class="site-footer glass-footer section-padding">
+        <div class="container">
+          <div class="footer-content grid-three-cols">
+            <div class="footer-brand">
+              <div class="logo">
+                <i class="fa-solid fa-notes-medical text-primary"></i>
+                <span class="logo-text">MEDILINK AI</span>
+              </div>
+              <p
+                class="footer-bio mt-3"
+                data-bn="এআই চালিত চিকিৎসা সমাধান, জরুরি সাড়া এবং নির্বিঘ্ন স্বাস্থ্যসেবা দিয়ে রোগীদের ক্ষমতায়ন।"
+              >
+                Empowering patients with AI-driven medical solutions, emergency
+                response, and seamless healthcare access.
+              </p>
+            </div>
+            <div class="contact-info">
+              <h4 class="footer-heading" data-bn="যোগাযোগ করুন">Contact Us</h4>
+              <ul class="contact-list">
+                <li>
+                  <i class="fa-solid fa-phone text-primary"></i> +880
+                  1234-567890
+                </li>
+                <li>
+                  <i class="fa-solid fa-envelope text-primary"></i>
+                  support@medilink.com.bd
+                </li>
+                <li>
+                  <i class="fa-solid fa-location-dot text-primary"></i> Dhaka,
+                  Bangladesh
+                </li>
+              </ul>
+            </div>
+            <div class="social-links">
+              <h4 class="footer-heading" data-bn="আমাদের অনুসরণ করুন">
+                Follow Us
+              </h4>
+              <div class="social-icons">
+                <a href="#" aria-label="Facebook" class="glass-icon"
+                  ><i class="fa-brands fa-facebook-f"></i
+                ></a>
+                <a href="#" aria-label="Twitter" class="glass-icon"
+                  ><i class="fa-brands fa-twitter"></i
+                ></a>
+                <a href="#" aria-label="LinkedIn" class="glass-icon"
+                  ><i class="fa-brands fa-linkedin-in"></i
+                ></a>
+                <a href="#" aria-label="Instagram" class="glass-icon"
+                  ><i class="fa-brands fa-instagram"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+          <div class="footer-bottom text-center">
+            <p class="copyright">&copy; SYLHET ROBOTICS CLUB.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="script.js" defer></script>
+  </body>
+</html>

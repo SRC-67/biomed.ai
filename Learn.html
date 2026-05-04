@@ -1,0 +1,830 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Learn More about Medilink AI - Empowering Healthcare through Innovation."
+    />
+    <title>Learn More | Medilink AI</title>
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      /* ==========================================================================
+         MEDILINK AI - "LEARN MORE" STYLESHEET
+         Role: Master UI/UX & Senior CSS Architect
+         ========================================================================== */
+
+      :root {
+        --primary-color: #008080;
+        --primary-dark: #006666;
+        --accent-mint: #f5fffa;
+        --white: #ffffff;
+        --text-main: #1a2b33;
+        --text-muted: #5a717a;
+
+        --bg-gradient: linear-gradient(135deg, #f5fffa 0%, #d8f0ea 100%);
+        --glass-bg: rgba(255, 255, 255, 0.65);
+        --glass-border: rgba(255, 255, 255, 0.5);
+        --glass-shadow: 0 8px 32px 0 rgba(0, 128, 128, 0.08);
+        --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        --transition-fast: all 0.2s ease-in-out;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        color: var(--text-main);
+        background: var(--bg-gradient);
+        background-attachment: fixed;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .section-padding {
+        padding: 6rem 0;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .text-primary {
+        color: var(--primary-color) !important;
+      }
+      .text-muted {
+        color: var(--text-muted);
+      }
+      .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .mt-3 {
+        margin-top: 1.5rem;
+      }
+      .mt-4 {
+        margin-top: 2rem;
+      }
+      .mb-3 {
+        margin-bottom: 1.5rem;
+      }
+      .mb-4 {
+        margin-bottom: 2.5rem;
+      }
+
+      /* Typography */
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-weight: 700;
+        line-height: 1.3;
+      }
+      .hero-headline {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+      }
+      .hero-subtext {
+        font-size: 1.2rem;
+        max-width: 700px;
+      }
+      .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+      .section-description {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* Glassmorphism System */
+      .glass-navbar,
+      .glass-card,
+      .glass-badge,
+      .glass-footer,
+      .glass-btn {
+        background: var(--glass-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow);
+      }
+
+      .glass-card {
+        border-radius: 20px;
+        padding: 2.5rem;
+        transition: var(--transition-smooth);
+      }
+      .glass-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px 0 rgba(0, 128, 128, 0.18);
+        border-color: rgba(255, 255, 255, 0.9);
+      }
+
+      .glass-badge {
+        display: inline-block;
+        padding: 0.5rem 1.2rem;
+        border-radius: 30px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+      }
+
+      /* Navbar */
+      .navbar {
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: var(--transition-smooth);
+      }
+      .navbar.scrolled {
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo a {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        font-size: 1.5rem;
+        font-weight: 800;
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .nav-links {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      /* Buttons */
+      .btn-outline {
+        padding: 0.7rem 1.5rem;
+        border-radius: 50px;
+        font-weight: 600;
+        font-family: "Poppins", sans-serif;
+        color: var(--primary-color);
+        transition: var(--transition-smooth);
+        background: transparent;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        cursor: pointer;
+        border: 2px solid var(--primary-color);
+      }
+      .btn-outline:hover {
+        background: var(--primary-color);
+        color: var(--white);
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        background: transparent;
+        border: none;
+        font-size: 1.8rem;
+        color: var(--primary-color);
+        cursor: pointer;
+      }
+
+      /* Floating Back Button */
+      .floating-back-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 999;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        transition: var(--transition-smooth);
+        cursor: pointer;
+      }
+      .floating-back-btn:hover {
+        background: var(--primary-color);
+        color: var(--white);
+        transform: scale(1.1);
+      }
+
+      /* Grids */
+      .grid-two-cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+      }
+      .grid-three-cols {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+      }
+      .align-center {
+        align-items: center;
+      }
+
+      /* ==========================================================================
+         VERTICAL INTERACTIVE TIMELINE
+         ========================================================================== */
+      .timeline-section {
+        position: relative;
+      }
+      .timeline-container {
+        position: relative;
+        max-width: 1000px;
+        margin: 4rem auto 0;
+      }
+
+      /* The Central Vertical Line */
+      .timeline-line {
+        position: absolute;
+        width: 6px;
+        background: rgba(0, 128, 128, 0.15);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        border-radius: 10px;
+      }
+
+      /* Timeline Item Container */
+      .timeline-item {
+        position: relative;
+        width: 50%;
+        padding: 2rem 3rem;
+        opacity: 0;
+        transition: all 0.8s ease;
+      }
+      .timeline-item.left {
+        left: 0;
+        text-align: right;
+        transform: translateX(-50px);
+      }
+      .timeline-item.right {
+        left: 50%;
+        text-align: left;
+        transform: translateX(50px);
+      }
+      .timeline-item.active {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* The Glowing Dots */
+      .timeline-dot {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--white);
+        border: 4px solid var(--primary-color);
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        z-index: 10;
+        transition: all 0.5s ease;
+        box-shadow: 0 0 0 0 rgba(0, 128, 128, 0.5);
+      }
+      .timeline-item.left .timeline-dot {
+        right: -25px;
+      }
+      .timeline-item.right .timeline-dot {
+        left: -25px;
+      }
+
+      /* Glow effect when active */
+      .timeline-item.active .timeline-dot {
+        background: var(--primary-color);
+        color: var(--white);
+        box-shadow: 0 0 20px 5px rgba(0, 128, 128, 0.4);
+      }
+
+      /* --- Scroll Reveal Utilities --- */
+      .reveal-on-scroll {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 0.8s ease;
+      }
+      .reveal-on-scroll.slide-left {
+        transform: translateX(-40px);
+      }
+      .reveal-on-scroll.slide-right {
+        transform: translateX(40px);
+      }
+      .reveal-on-scroll.active {
+        opacity: 1;
+        transform: translate(0);
+      }
+      .pulse-animation {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+          color: var(--primary-dark);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* ==========================================================================
+         MOBILE RESPONSIVE OPTIMIZATIONS
+         ========================================================================== */
+      @media screen and (max-width: 900px) {
+        .grid-two-cols {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+          text-align: center;
+        }
+        .mission-visual {
+          grid-row: 1;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .container {
+          width: 92%;
+        }
+        .section-padding {
+          padding: 4rem 0;
+        }
+
+        /* Typography adjustments */
+        .hero-headline {
+          font-size: 2.2rem;
+          line-height: 1.3;
+        }
+        .hero-subtext {
+          font-size: 1rem;
+        }
+        .section-title {
+          font-size: 1.8rem;
+        }
+        .section-description {
+          font-size: 0.95rem;
+        }
+
+        /* Navbar Updates */
+        .nav-links {
+          display: none;
+        }
+        .mobile-menu-btn {
+          display: block;
+        }
+        .nav-links.active {
+          display: flex;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: rgba(255, 255, 255, 0.98);
+          backdrop-filter: blur(16px);
+          flex-direction: column;
+          padding: 2rem 0;
+          gap: 1rem;
+          text-align: center;
+          box-shadow: 0 10px 20px rgba(0, 128, 128, 0.1);
+        }
+
+        /* ----------------------------------------------------
+           FIXED TIMELINE FOR MOBILE (No overlapping!)
+           ---------------------------------------------------- */
+        .timeline-line {
+          left: 20px; /* Moves line to the far left */
+          transform: none;
+        }
+
+        .timeline-item {
+          width: 100%;
+          padding: 1.5rem 1rem 1.5rem 60px; /* Gives content breathing room */
+          text-align: left !important;
+          left: 0 !important;
+          transform: translateX(-30px);
+        }
+        .timeline-item.right {
+          transform: translateX(30px);
+        }
+
+        /* Centers the dot perfectly over the new 20px line */
+        .timeline-item.left .timeline-dot,
+        .timeline-item.right .timeline-dot {
+          left: 0px;
+          right: auto;
+          width: 40px;
+          height: 40px;
+          font-size: 1rem;
+        }
+
+        .floating-back-btn {
+          bottom: 20px;
+          right: 20px;
+          width: 50px;
+          height: 50px;
+          font-size: 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Floating Back to Home Button -->
+    <a
+      href="index.html"
+      class="floating-back-btn glass-btn"
+      aria-label="Back to Home"
+    >
+      <i class="fa-solid fa-house-chimney-medical"></i>
+    </a>
+
+    <!-- ================= NAVBAR ================= -->
+    <header>
+      <nav class="navbar glass-navbar">
+        <div class="container nav-container">
+          <div class="logo">
+            <a href="index.html">
+              <i class="fa-solid fa-notes-medical text-primary"></i>
+              <span class="logo-text" data-bn="মেডিলিংক এআই">MEDILINK AI</span>
+            </a>
+          </div>
+
+          <div class="nav-actions">
+            <!-- Language and Navigation -->
+            <ul class="nav-links">
+              <li>
+                <a href="index.html" class="btn-outline glass-btn">
+                  <i class="fa-solid fa-arrow-left"></i>
+                  <span data-bn="অ্যাপে ফিরে যান">Back to App</span>
+                </a>
+              </li>
+              <li>
+                <button id="lang-toggle-btn" class="btn-outline glass-btn">
+                  <i class="fa-solid fa-language"></i> বাংলা
+                </button>
+              </li>
+            </ul>
+
+            <button
+              id="mobile-menu-btn"
+              class="mobile-menu-btn"
+              aria-label="Toggle Menu"
+            >
+              <i class="fa-solid fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ================= HERO SECTION ================= -->
+      <section
+        id="hero"
+        class="hero-section section-padding text-center reveal-on-scroll"
+      >
+        <div class="container">
+          <span class="badge glass-badge" data-bn="আমাদের প্ল্যাটফর্ম সম্পর্কে"
+            >About Our Platform</span
+          >
+          <h1
+            class="hero-headline text-primary"
+            data-bn="উদ্ভাবনের মাধ্যমে স্বাস্থ্যসেবার ক্ষমতায়ন।"
+          >
+            Empowering Healthcare Through Innovation.
+          </h1>
+          <p
+            class="hero-subtext mx-auto"
+            data-bn="মেডিলিংক এআই হলো একটি যুগান্তকারী প্ল্যাটফর্ম যা বিপদগ্রস্ত রোগীদের এবং তাদের প্রয়োজনীয় তাৎক্ষণিক চিকিৎসা সেবার মধ্যে সেতুবন্ধন তৈরি করে।"
+          >
+            Medilink AI is a revolutionary platform designed to bridge the gap
+            between patients in distress and the immediate medical care they
+            require.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= MISSION & PURPOSE ================= -->
+      <section id="mission" class="mission-section section-padding">
+        <div class="container grid-two-cols align-center">
+          <div class="mission-text reveal-on-scroll slide-left">
+            <h2 class="section-title" data-bn="আমাদের লক্ষ্য ও উদ্দেশ্য">
+              Our Mission & Purpose
+            </h2>
+            <p
+              class="section-description"
+              data-bn="মেডিকেল ইমার্জেন্সিতে প্রতিটি সেকেন্ড মূল্যবান। আমাদের উদ্দেশ্য হলো উপসর্গ অনুভব করা এবং পেশাদার সাহায্য পাওয়ার মাঝের বাধা দূর করে জীবন বাঁচানো।"
+            >
+              Every second counts in a medical emergency. Our purpose is to save
+              lives by removing the friction between experiencing a symptom and
+              getting professional help.
+            </p>
+            <p
+              class="section-description"
+              data-bn="আপনার আশেপাশে থাকা অ্যাম্বুলেন্সকে এসওএস পাঠানো হোক বা কোনো দীর্ঘস্থায়ী রোগের জন্য বিশেষজ্ঞ ডাক্তার খোঁজা হোক, মেডিলিংক এআই ২৪/৭ আপনার সক্রিয় ও বুদ্ধিমান স্বাস্থ্য সঙ্গী হিসেবে কাজ করে।"
+            >
+              Whether you need to instantly broadcast an SOS to nearby
+              ambulances or find a specialized doctor for a lingering illness,
+              Medilink AI serves as your proactive, intelligent health companion
+              24/7.
+            </p>
+          </div>
+          <div class="mission-visual reveal-on-scroll slide-right">
+            <div class="glass-card visual-card text-center">
+              <i
+                class="fa-solid fa-hand-holding-medical fa-5x text-primary pulse-animation"
+              ></i>
+              <h3 class="mt-3" data-bn="সেতুবন্ধন তৈরি করা">
+                Bridging The Gap
+              </h3>
+              <p
+                class="text-muted mt-2"
+                data-bn="রোগী ➔ মেডিলিংক এআই ➔ ডাক্তার এবং জরুরি সেবা"
+              >
+                Patients ➔ Medilink AI ➔ Doctors & Emergency Services
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= INTERACTIVE VERTICAL TIMELINE ================= -->
+      <section id="timeline" class="timeline-section section-padding bg-light">
+        <div class="container">
+          <div class="text-center reveal-on-scroll">
+            <h2 class="section-title" data-bn="মেডিলিংক যাত্রা">
+              The Medilink Journey
+            </h2>
+            <p
+              class="section-description mx-auto"
+              data-bn="শুরু থেকে শেষ পর্যন্ত আমরা কীভাবে আপনার জরুরি অবস্থা এবং অসুস্থতাগুলি প্রক্রিয়া করি।"
+            >
+              How we process your emergencies and ailments from start to finish.
+            </p>
+          </div>
+
+          <div class="timeline-container">
+            <div class="timeline-line"></div>
+
+            <!-- Step 1 -->
+            <div class="timeline-item left">
+              <div class="timeline-dot">
+                <i class="fa-solid fa-magnifying-glass-chart"></i>
+              </div>
+              <div class="glass-card timeline-content">
+                <h3 class="text-primary" data-bn="ধাপ ১: সনাক্তকরণ">
+                  Step 1: Identification
+                </h3>
+                <p
+                  data-bn="আপনি একটি চিকিৎসা সমস্যা চিহ্নিত করেন। আমাদের প্ল্যাটফর্মে কেবল আপনার উপসর্গ বা সমস্যা টাইপ করার মাধ্যমেই যাত্রা শুরু হয়।"
+                >
+                  You identify a medical issue. By simply typing your symptoms
+                  or problem into our platform, the journey begins immediately.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="timeline-item right">
+              <div class="timeline-dot"><i class="fa-solid fa-robot"></i></div>
+              <div class="glass-card timeline-content">
+                <h3 class="text-primary" data-bn="ধাপ ২: এআই এর কাজ">
+                  Step 2: AI Action
+                </h3>
+                <p
+                  data-bn="মেডিলিংক এআই তাৎক্ষণিকভাবে আপনার কীওয়ার্ডগুলি বিশ্লেষণ করে। আমরা দ্রুত আপনার প্রয়োজনীয় বিশেষজ্ঞদের হাইলাইট করি এবং প্রাথমিক চিকিৎসা বা ফার্মেসির ওষুধের পরামর্শ দিই।"
+                >
+                  Medilink AI instantly analyzes your keywords. We seamlessly
+                  highlight the exact specialists you need and recommend initial
+                  first-aid or pharmacy medicines.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="timeline-item left">
+              <div class="timeline-dot">
+                <i class="fa-solid fa-heart-circle-check"></i>
+              </div>
+              <div class="glass-card timeline-content">
+                <h3 class="text-primary" data-bn="ধাপ ৩: আরোগ্য লাভ">
+                  Step 3: Recovery
+                </h3>
+                <p
+                  data-bn="আপনার ডাক্তারের সাথে যোগাযোগ করুন, হোম ডেলিভারির মাধ্যমে ওষুধ অর্ডার করুন এবং দ্রুত, চাপমুক্ত আরোগ্য লাভের অভিজ্ঞতা নিন।"
+                >
+                  Connect with your doctor, order your medications via home
+                  delivery, and experience a rapid, stress-free recovery
+                  process.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ABOUT THE PROJECT / LOGIC ================= -->
+      <section id="about" class="about-section section-padding">
+        <div class="container text-center reveal-on-scroll">
+          <h2 class="section-title" data-bn="স্মার্ট লজিক এবং সুপারিশ">
+            Smart Logic & Recommendations
+          </h2>
+          <p
+            class="section-description mx-auto mb-4"
+            data-bn="মেডিলিংক এআই মূলত ন্যাচারাল ল্যাঙ্গুয়েজ কীওয়ার্ড এক্সট্রাকশন ব্যবহার করে। আপনি যখন আপনার অসুস্থতার বর্ণনা দেন, সিস্টেমটি আমাদের বিশাল মেডিকেল ডাটাবেসের সাথে আপনার ইনপুট মিলিয়ে দেখে।"
+          >
+            Under the hood, Medilink AI utilizes Natural Language Keyword
+            Extraction. When you describe your ailment, the system
+            cross-references your input against our extensive medical database.
+          </p>
+          <div class="grid-three-cols mt-4">
+            <div class="glass-card logic-card">
+              <i class="fa-solid fa-database fa-3x text-primary mb-3"></i>
+              <h4 data-bn="ডেটা পার্সিং">Data Parsing</h4>
+              <p class="text-muted" data-bn="নিরাপদে মূল উপসর্গগুলো বের করে।">
+                Extracts core symptoms securely.
+              </p>
+            </div>
+            <div class="glass-card logic-card">
+              <i class="fa-solid fa-microchip fa-3x text-primary mb-3"></i>
+              <h4 data-bn="এআই ম্যাচিং">AI Matching</h4>
+              <p
+                class="text-muted"
+                data-bn="উপসর্গগুলোকে নির্দিষ্ট চিকিৎসা ক্ষেত্রের সাথে মেলায়।"
+              >
+                Matches symptoms to specific medical fields.
+              </p>
+            </div>
+            <div class="glass-card logic-card">
+              <i class="fa-solid fa-user-doctor fa-3x text-primary mb-3"></i>
+              <h4 data-bn="হাইলাইটিং">Highlighting</h4>
+              <p
+                class="text-muted"
+                data-bn="অপ্রয়োজনীয় ডেটা ম্লান করে আপনার মনোযোগ আকর্ষণ করে।"
+              >
+                Dims irrelevant data to focus your attention.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer glass-footer section-padding text-center">
+      <div class="container">
+        <h3 class="text-primary mb-3">MEDILINK AI</h3>
+        <p
+          class="text-muted"
+          data-bn="আগামীর সুস্থতার জন্য ডিজাইন ও ডেভেলপ করা হয়েছে।"
+        >
+          Designed & Developed for a Healthier Tomorrow.
+        </p>
+        <div class="footer-bottom mt-4">
+          <p class="copyright">&copy; 2026 SYLHET ROBOTICS CLUB.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      /* ==========================================================================
+         MEDILINK AI - "LEARN MORE" JAVASCRIPT
+         Role: Scroll Reveal, Timeline Animations, & Translation State
+         ========================================================================== */
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- 1. GLOBAL BILINGUAL TRANSLATION SYNC ---
+        const langToggleBtn = document.getElementById("lang-toggle-btn");
+
+        // Function to apply language across the page
+        const applyLanguage = (lang) => {
+          const translatableElements = document.querySelectorAll("[data-bn]");
+
+          if (lang === "bn") {
+            translatableElements.forEach((el) => {
+              if (!el.hasAttribute("data-en"))
+                el.setAttribute("data-en", el.innerText);
+              el.innerText = el.getAttribute("data-bn");
+            });
+            if (langToggleBtn)
+              langToggleBtn.innerHTML = `<i class="fa-solid fa-language"></i> English`;
+          } else {
+            translatableElements.forEach((el) => {
+              if (el.hasAttribute("data-en"))
+                el.innerText = el.getAttribute("data-en");
+            });
+            if (langToggleBtn)
+              langToggleBtn.innerHTML = `<i class="fa-solid fa-language"></i> বাংলা`;
+          }
+        };
+
+        // Check LocalStorage for saved language preference on load
+        const savedLang = localStorage.getItem("medilinkLang") || "en";
+        applyLanguage(savedLang);
+
+        // Language Toggle Button Click Event
+        if (langToggleBtn) {
+          langToggleBtn.addEventListener("click", () => {
+            const currentLang =
+              localStorage.getItem("medilinkLang") === "bn" ? "en" : "bn";
+            localStorage.setItem("medilinkLang", currentLang);
+            applyLanguage(currentLang);
+          });
+        }
+
+        // --- 2. MOBILE HAMBURGER MENU ---
+        const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+        const navLinks = document.querySelector(".nav-links");
+
+        if (mobileMenuBtn && navLinks) {
+          const icon = mobileMenuBtn.querySelector("i");
+          mobileMenuBtn.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            if (navLinks.classList.contains("active")) {
+              icon.classList.replace("fa-bars", "fa-xmark");
+            } else {
+              icon.classList.replace("fa-xmark", "fa-bars");
+            }
+          });
+        }
+
+        // --- 3. SCROLL REVEAL & TIMELINE ANIMATION ---
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px 0px -15% 0px",
+          threshold: 0.2,
+        };
+
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        document
+          .querySelectorAll(".timeline-item, .reveal-on-scroll")
+          .forEach((item) => {
+            scrollObserver.observe(item);
+          });
+
+        // Sticky Navbar Effect
+        const navbar = document.querySelector(".navbar");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 50) navbar.classList.add("scrolled");
+          else navbar.classList.remove("scrolled");
+        });
+      });
+    </script>
+  </body>
+</html>
