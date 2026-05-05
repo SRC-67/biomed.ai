@@ -140,7 +140,7 @@
           <div class="container nav-container">
             <!-- Logo -->
             <div class="logo">
-              <a href="MEDBIOAIhome.html">
+              <a href="index.html">
                 <i class="fa-solid fa-notes-medical text-primary"></i>
                 <span class="logo-text" data-bn="মেডিলিংক এআই"
                   >MEDILINK AI</span
@@ -150,7 +150,7 @@
 
             <!-- Navigation Links -->
             <ul class="nav-links">
-              <li><a href="#hero" data-bn="হোম">Home</a></li>
+              <li><a href="#hero-dynamic-section" data-bn="হোম">Home</a></li>
               <li>
                 <a href="#emergency" class="text-danger" data-bn="জরুরী অবস্থা"
                   >Emergency</a
@@ -202,110 +202,92 @@
       </header>
 
       <main>
-        <!-- 1. HERO SECTION -->
-        <section id="hero" class="hero-section section-padding">
-          <!-- Updated Layout Container -->
-          <div class="container hero-layout">
-            <!-- Hero Text Group -->
-            <div class="hero-text animate-on-scroll slide-in-left">
-              <span id="personalized-greeting" class="badge glass-badge"
-                >AI-Powered Healthcare</span
-              >
+        <!-- ================= 1. HERO DYNAMIC SECTION ================= -->
+        <section id="hero-dynamic-section">
+          <!-- Floating Medical Particles Background -->
+          <div id="medical-universe-canvas"></div>
 
-              <h1
-                class="hero-headline"
-                data-bn="আপনার বুদ্ধিমান স্বাস্থ্য সঙ্গী, যেকোনো সময়, যেকোনো স্থানে।"
-              >
-                Your Intelligent Health Companion, Anytime, Anywhere.
-              </h1>
-              <p
-                class="hero-subtext"
-                data-bn="পরবর্তী প্রজন্মের চিকিৎসা সহায়তার অভিজ্ঞতা নিন। মেডিলিংক এআই আপনাকে বিশেষজ্ঞ ডাক্তার, জরুরি পরিষেবা এবং প্রয়োজনীয় ওষুধের সাথে নির্বিঘ্নে সংযুক্ত করে।"
-              >
-                Experience next-generation medical assistance. Medilink AI
-                connects you with expert doctors, emergency services, and
-                essential medicines seamlessly.
-              </p>
+          <!-- Hero Content -->
+          <div class="hero-content-wrapper">
+            <p
+              class="hero-top-badge"
+              id="personalized-greeting"
+              data-bn="হ্যালো, স্বাগতম"
+            >
+              <i class="fa-solid fa-sparkles"></i> Medilink AI &mdash; Sylhet
+              Robotic Club
+            </p>
 
-              <p
-                id="hero-insight"
-                class="text-primary"
-                style="font-weight: 600; margin-bottom: 1rem; display: none"
-              ></p>
-            </div>
+            <h1
+              class="hero-headline-massive"
+              data-bn="আপনার এআই-চালিত স্বাস্থ্যসেবা সহচর"
+            >
+              YOUR <span>AI-POWERED</span><br />
+              HEALTHCARE <span>COMPANION</span>
+            </h1>
 
-            <!-- Hero Image Group (biohero.jpeg) -->
-            <div class="hero-visual animate-on-scroll slide-in-right">
-              <div
-                class="glass-card hero-image-wrapper"
-                style="
-                  padding: 1rem;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                "
-              >
-                <img
-                  src="biohero.jpeg"
-                  alt="Medilink AI Healthcare"
-                  class="hero-img"
-                  style="
-                    border-radius: 12px;
-                    max-width: 100%;
-                    height: auto;
-                    box-shadow: var(--glass-shadow);
-                  "
-                />
-              </div>
-            </div>
+            <p
+              class="hero-subtext-large"
+              id="hero-insight"
+              data-bn="স্মার্ট রোগ নির্ণয়, তাৎক্ষণিক ডাক্তার ম্যাচিং এবং দোরগোড়ায় ওষুধ ডেলিভারি — সব কিছু একটি বুদ্ধিমান প্ল্যাটফর্মে।"
+            >
+              Smart diagnosis, instant doctor matching, and doorstep medicine
+              delivery &mdash; all in one intelligent platform built for Sylhet
+              and beyond.
+            </p>
 
-            <!-- Hero Buttons Group -->
-            <div class="hero-buttons animate-on-scroll slide-in-left">
-              <a href="doctor-finder.html"
-                ><button class="btn-primary" data-bn="একজন বিশেষজ্ঞ খুঁজুন">
-                  Find a Specialist
-                </button></a
+            <div class="hero-cta-group">
+              <a
+                href="doctor-finder.html"
+                class="btn-hero-primary"
+                data-bn="ডাক্তার খুঁজুন"
               >
-              <a href="Learn.html" target="_blank"
-                ><button class="btn-secondary glass-btn" data-bn="আরও জানুন">
-                  Learn More
-                </button></a
+                <i class="fa-solid fa-user-doctor"></i> Find a Doctor
+              </a>
+              <a
+                href="Learn.html"
+                class="btn-hero-secondary"
+                data-bn="আরও জানুন"
               >
+                <i class="fa-solid fa-circle-info"></i> Learn More
+              </a>
             </div>
           </div>
         </section>
 
         <!-- 2. SOS / EMERGENCY SECTION -->
-        <section
-          id="emergency"
-          class="sos-section section-padding glass-section text-center"
+        <a href="sos.html">
+          <section
+            id="emergency"
+            class="sos-section section-padding glass-section text-center"
+          >
+            <div class="container animate-on-scroll fade-in-up">
+              <h2
+                class="section-title text-danger"
+                data-bn="মেডিকেল ইমার্জেন্সি?"
+              >
+                Medical Emergency?
+              </h2>
+              <p
+                class="section-description"
+                data-bn="জরুরী সহায়তা পেতে নিচের বোতামটি চাপুন, যা আপনার নিকটস্থ অ্যাম্বুলেন্স এবং জরুরি পরিচিতদের কাছে সংকেত পাঠাবে।"
+              >
+                Press the button below to instantly broadcast an SOS alert to
+                nearby ambulances and emergency contacts.
+              </p>
+              <button
+                id="sos-button"
+                class="btn-emergency pulse-animation glass-card"
+                aria-label="Trigger Emergency SOS"
+              >
+                <span class="sos-icon"
+                  ><i class="fa-solid fa-truck-medical fa-2x"></i
+                ></span>
+                <span class="sos-text" data-bn="এসওএস">SOS</span></button
+              ><
+            </div>
+          </section></a
         >
-          <div class="container animate-on-scroll fade-in-up">
-            <h2
-              class="section-title text-danger"
-              data-bn="মেডিকেল ইমার্জেন্সি?"
-            >
-              Medical Emergency?
-            </h2>
-            <p
-              class="section-description"
-              data-bn="জরুরী সহায়তা পেতে নিচের বোতামটি চাপুন, যা আপনার নিকটস্থ অ্যাম্বুলেন্স এবং জরুরি পরিচিতদের কাছে সংকেত পাঠাবে।"
-            >
-              Press the button below to instantly broadcast an SOS alert to
-              nearby ambulances and emergency contacts.
-            </p>
-            <button
-              id="sos-button"
-              class="btn-emergency pulse-animation glass-card"
-              aria-label="Trigger Emergency SOS"
-            >
-              <span class="sos-icon"
-                ><i class="fa-solid fa-truck-medical fa-2x"></i
-              ></span>
-              <span class="sos-text" data-bn="এসওএস">SOS</span>
-            </button>
-          </div>
-        </section>
 
         <!-- 3. DOCTOR SEARCH SECTION -->
         <section
@@ -337,8 +319,8 @@
                 </div>
                 <h3 class="card-title" data-bn="হৃদরোগবিদ্যা">Cardiology</h3>
                 <a href="#" class="card-link" data-bn="ডাক্তার দেখুন"
-                  >View Doctors <i class="fa-solid fa-arrow-right"></i
-                ></a>
+                  >View Doctors <i class="fa-solid fa-arrow-right"></i>
+                </a>
               </article>
               <article
                 class="specialty-card glass-card animate-on-scroll stagger-item"
@@ -347,8 +329,8 @@
                 <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
                 <h3 class="card-title" data-bn="স্নায়ুবিদ্যা">Neurology</h3>
                 <a href="#" class="card-link" data-bn="ডাক্তার দেখুন"
-                  >View Doctors <i class="fa-solid fa-arrow-right"></i
-                ></a>
+                  >View Doctors <i class="fa-solid fa-arrow-right"></i>
+                </a>
               </article>
               <article
                 class="specialty-card glass-card animate-on-scroll stagger-item"
@@ -357,8 +339,8 @@
                 <div class="card-icon"><i class="fa-solid fa-baby"></i></div>
                 <h3 class="card-title" data-bn="শিশুবিদ্যা">Pediatrics</h3>
                 <a href="#" class="card-link" data-bn="ডাক্তার দেখুন"
-                  >View Doctors <i class="fa-solid fa-arrow-right"></i
-                ></a>
+                  >View Doctors <i class="fa-solid fa-arrow-right"></i>
+                </a>
               </article>
               <article
                 class="specialty-card glass-card animate-on-scroll stagger-item"
@@ -367,8 +349,8 @@
                 <div class="card-icon"><i class="fa-solid fa-tooth"></i></div>
                 <h3 class="card-title" data-bn="দন্তচিকিৎসা">Dentistry</h3>
                 <a href="#" class="card-link" data-bn="ডাক্তার দেখুন"
-                  >View Doctors <i class="fa-solid fa-arrow-right"></i
-                ></a>
+                  >View Doctors <i class="fa-solid fa-arrow-right"></i>
+                </a>
               </article>
             </div>
 
@@ -649,22 +631,33 @@
                 Follow Us
               </h4>
               <div class="social-icons">
-                <a href="https://www.facebook.com/share/1Az5jFhDwg/?mibextid=wwXIfr" target="_blank" aria-label="Facebook" class="glass-icon"
+                <a
+                  href="https://www.facebook.com/share/1Az5jFhDwg/?mibextid=wwXIfr"
+                  target="_blank"
+                  aria-label="Facebook"
+                  class="glass-icon"
                   ><i class="fa-brands fa-facebook-f"></i
                 ></a>
                 <a href="#" aria-label="Twitter" class="glass-icon"
                   ><i class="fa-brands fa-twitter"></i
                 ></a>
-                ></a>
-                <a href="https://www.instagram.com/sylhetroboticsclub?igsh=eW4yNXc0NzdzZmp2" target="_blank" aria-label="Instagram" class="glass-icon"
+                <a
+                  href="https://www.instagram.com/sylhetroboticsclub?igsh=eW4yNXc0NzdzZmp2"
+                  target="_blank"
+                  aria-label="Instagram"
+                  class="glass-icon"
                   ><i class="fa-brands fa-instagram"></i
                 ></a>
               </div>
             </div>
           </div>
           <div class="footer-bottom text-center">
-            <p class="copyright"> Disclaimer: Medilink AI is an assistive technology, not a substitute for professional medical advice. Always consult a doctor in emergencies.
-Built with ❤️ by Sylhet Robotic Club. | &copy; 2026 Medilink AI.</p>
+            <p class="copyright">
+              Disclaimer: Medilink AI is an assistive technology, not a
+              substitute for professional medical advice. Always consult a
+              doctor in emergencies. Built with ❤️ by Sylhet Robotic Club. |
+              &copy; 2026 Medilink AI.
+            </p>
           </div>
         </div>
       </footer>

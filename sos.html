@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <meta name="description" content="Medilink AI - Emergency SOS System" />
+    <title>SOS Emergency | Medilink AI</title>
+
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      /* ==========================================================================
+           MEDILINK AI - SOS SYSTEM STYLESHEET
+           ========================================================================== */
+      :root {
+        --bg-dark: #0f0f0f;
+        --bg-radial: radial-gradient(
+          circle at center,
+          #2a0808 0%,
+          #0a0000 100%
+        );
+        --red-pure: #ff0000;
+        --red-glow: rgba(255, 0, 0, 0.6);
+        --white: #ffffff;
+        --text-muted: #888888;
+        --glass-bg: rgba(20, 20, 20, 0.8);
+        --glass-border: rgba(255, 255, 255, 0.1);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: var(--bg-radial);
+        color: var(--white);
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        touch-action: manipulation; /* Prevent zoom on double tap */
+      }
+
+      /* --- Header --- */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 2rem;
+        background: rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid var(--glass-border);
+        z-index: 10;
+      }
+      .header a {
+        color: var(--white);
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+      .header .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+      }
+      .header .logo i {
+        color: var(--red-pure);
+      }
+
+      /* --- Main Content Container --- */
+      .main-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      /* --- Status Bar --- */
+      .status-bar {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        padding: 10px 20px;
+        border-radius: 50px;
+        margin-bottom: 3rem;
+        font-size: 0.9rem;
+        display: flex;
+        gap: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      }
+      .status-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .status-ok {
+        color: #00ff88;
+      }
+      .status-wait {
+        color: #ffaa00;
+      }
+      .status-err {
+        color: var(--red-pure);
+      }
+
+      /* --- Massive SOS Button --- */
+      .sos-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 3rem;
+      }
+
+      .sos-btn {
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        background: var(--red-pure);
+        color: var(--white);
+        font-size: 4.5rem;
+        font-weight: 800;
+        border: 8px solid rgba(255, 255, 255, 0.2);
+        box-shadow:
+          0 0 40px var(--red-glow),
+          inset 0 0 20px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        outline: none;
+        z-index: 2;
+        transition: transform 0.1s;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+        animation: pulse-ring 2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+
+      .sos-btn:active {
+        transform: scale(0.95);
+      }
+
+      /* Pulse Animation */
+      @keyframes pulse-ring {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 60px rgba(255, 0, 0, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+        }
+      }
+
+      /* Radar Waves Background */
+      .radar-wave {
+        position: absolute;
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        border: 2px solid var(--red-pure);
+        opacity: 0;
+        animation: radar 3s infinite linear;
+      }
+      .radar-wave:nth-child(2) {
+        animation-delay: 1s;
+      }
+      .radar-wave:nth-child(3) {
+        animation-delay: 2s;
+      }
+
+      @keyframes radar {
+        0% {
+          transform: scale(1);
+          opacity: 0.8;
+        }
+        100% {
+          transform: scale(3);
+          opacity: 0;
+        }
+      }
+
+      /* --- Voice Instruction --- */
+      .voice-instruction {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+      }
+      .voice-instruction span {
+        color: var(--white);
+        font-weight: 600;
+      }
+
+      /* --- Secondary Actions --- */
+      .action-btn {
+        background: transparent;
+        border: 2px solid var(--white);
+        color: var(--white);
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .action-btn:hover {
+        background: var(--white);
+        color: var(--bg-dark);
+      }
+
+      /* --- Countdown Overlay --- */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(15, 0, 0, 0.95);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .overlay-title {
+        font-size: 2.5rem;
+        color: var(--red-pure);
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      .countdown-number {
+        font-size: 8rem;
+        font-weight: 800;
+        margin-bottom: 3rem;
+        text-shadow: 0 0 30px var(--red-glow);
+        animation: heartbeat 1s infinite;
+      }
+
+      @keyframes heartbeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+      }
+
+      .cancel-btn {
+        background: transparent;
+        border: 3px solid var(--white);
+        color: var(--white);
+        padding: 1.2rem 4rem;
+        border-radius: 50px;
+        font-size: 1.5rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .cancel-btn:hover {
+        background: var(--white);
+        color: var(--red-pure);
+      }
+
+      /* --- Mobile Optimization --- */
+      @media (max-width: 768px) {
+        .sos-btn {
+          width: 200px;
+          height: 200px;
+          font-size: 3.5rem;
+        }
+        .radar-wave {
+          width: 200px;
+          height: 200px;
+        }
+        .status-bar {
+          flex-direction: column;
+          gap: 5px;
+          padding: 15px;
+          border-radius: 20px;
+        }
+        .countdown-number {
+          font-size: 6rem;
+        }
+        .overlay-title {
+          font-size: 2rem;
+        }
+        .header {
+          padding: 1rem;
+        }
+        .header .logo span {
+          display: none;
+        } /* Hide text, keep icon to save space */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back</a>
+      <div class="logo">
+        <i class="fa-solid fa-notes-medical"></i>
+        <span>MEDILINK AI</span>
+      </div>
+    </header>
+
+    <!-- Main Application Area -->
+    <div class="main-container">
+      <!-- Sensor Status -->
+      <div class="status-bar">
+        <div class="status-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <span id="loc-status" class="status-wait">Fetching Location...</span>
+        </div>
+        <div class="status-item">
+          <i class="fa-solid fa-microphone"></i>
+          <span id="mic-status" class="status-wait">Mic Standby</span>
+        </div>
+        <div class="status-item">
+          <i class="fa-solid fa-wifi"></i>
+          <span id="net-status">Checking...</span>
+        </div>
+      </div>
+
+      <!-- Interactive SOS Area -->
+      <div class="sos-wrapper">
+        <div class="radar-wave"></div>
+        <div class="radar-wave"></div>
+        <div class="radar-wave"></div>
+        <button id="sos-btn" class="sos-btn" aria-label="Trigger Emergency SOS">
+          SOS
+        </button>
+      </div>
+
+      <p class="voice-instruction">Tap the button or say <span>"HELP"</span></p>
+
+      <!-- Nearby Hospitals -->
+      <button id="hospitals-btn" class="action-btn">
+        <i class="fa-solid fa-hospital"></i> Nearby Hospitals
+      </button>
+    </div>
+
+    <!-- Countdown Overlay -->
+    <div id="overlay" class="overlay">
+      <h1 class="overlay-title">DISPATCHING SOS IN</h1>
+      <div id="countdown" class="countdown-number">5</div>
+      <button id="cancel-btn" class="cancel-btn">CANCEL</button>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- Elements ---
+        const sosBtn = document.getElementById("sos-btn");
+        const cancelBtn = document.getElementById("cancel-btn");
+        const overlay = document.getElementById("overlay");
+        const countdownEl = document.getElementById("countdown");
+        const hospitalsBtn = document.getElementById("hospitals-btn");
+
+        const locStatus = document.getElementById("loc-status");
+        const micStatus = document.getElementById("mic-status");
+        const netStatus = document.getElementById("net-status");
+
+        // --- State Variables ---
+        let currentLat = null;
+        let currentLng = null;
+        let countdownTimer = null;
+        let secondsLeft = 5;
+
+        // Audio System Variables
+        let audioCtx = null;
+        let oscillator = null;
+        let gainNode = null;
+        let sirenInterval = null;
+
+        // ==========================================
+        // 1. HARDWARE SENSORS & STATUS INIT
+        // ==========================================
+
+        // Network Status
+        const updateNetworkStatus = () => {
+          if (navigator.onLine) {
+            netStatus.textContent = "Online (WhatsApp Ready)";
+            netStatus.className = "status-ok";
+          } else {
+            netStatus.textContent = "Offline (SMS Mode)";
+            netStatus.className = "status-wait";
+          }
+        };
+        window.addEventListener("online", updateNetworkStatus);
+        window.addEventListener("offline", updateNetworkStatus);
+        updateNetworkStatus();
+
+        // Geolocation Fetch
+        if ("geolocation" in navigator) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              currentLat = position.coords.latitude;
+              currentLng = position.coords.longitude;
+              locStatus.textContent = "Location Locked";
+              locStatus.className = "status-ok";
+            },
+            (error) => {
+              console.warn("Location error:", error.message);
+              locStatus.textContent = "Location Denied/Failed";
+              locStatus.className = "status-err";
+            },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 },
+          );
+        } else {
+          locStatus.textContent = "Location Unsupported";
+          locStatus.className = "status-err";
+        }
+
+        // Web Speech API (Voice Command)
+        const SpeechRecognition =
+          window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (SpeechRecognition) {
+          const recognition = new SpeechRecognition();
+          recognition.continuous = true;
+          recognition.interimResults = false;
+          recognition.lang = "en-US";
+
+          recognition.onstart = () => {
+            micStatus.textContent = "Listening for 'Help'";
+            micStatus.className = "status-ok";
+          };
+
+          recognition.onerror = (e) => {
+            if (e.error === "not-allowed") {
+              micStatus.textContent = "Mic Denied";
+              micStatus.className = "status-err";
+            }
+          };
+
+          recognition.onresult = (event) => {
+            const lastResultIndex = event.results.length - 1;
+            const transcript = event.results[lastResultIndex][0].transcript
+              .trim()
+              .toLowerCase();
+
+            if (
+              transcript.includes("help") &&
+              !overlay.classList.contains("active")
+            ) {
+              triggerSOS();
+            }
+          };
+
+          recognition.onend = () => {
+            // Auto-restart listening to keep it active
+            try {
+              recognition.start();
+            } catch (e) {}
+          };
+
+          // Request mic permission and start
+          try {
+            recognition.start();
+          } catch (e) {}
+        } else {
+          micStatus.textContent = "Voice Unsupported";
+          micStatus.className = "status-err";
+        }
+
+        // ==========================================
+        // 2. HTML5 AUDIO API (SYNTHESIZED SIREN)
+        // ==========================================
+        function playSiren() {
+          // Initialize Audio Context on user interaction
+          if (!audioCtx) {
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          }
+
+          if (audioCtx.state === "suspended") {
+            audioCtx.resume();
+          }
+
+          oscillator = audioCtx.createOscillator();
+          gainNode = audioCtx.createGain();
+
+          oscillator.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+
+          oscillator.type = "square"; // Harsh, alarming sound
+          oscillator.frequency.setValueAtTime(600, audioCtx.currentTime);
+
+          // Volume control
+          gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+
+          oscillator.start();
+
+          // Alternate frequency to create European-style siren effect
+          let isHigh = true;
+          sirenInterval = setInterval(() => {
+            oscillator.frequency.setValueAtTime(
+              isHigh ? 800 : 600,
+              audioCtx.currentTime,
+            );
+            isHigh = !isHigh;
+          }, 400);
+        }
+
+        function stopSiren() {
+          if (oscillator) {
+            oscillator.stop();
+            oscillator.disconnect();
+            clearInterval(sirenInterval);
+            oscillator = null;
+          }
+        }
+
+        // ==========================================
+        // 3. SOS LOGIC & COUNTDOWN
+        // ==========================================
+        function triggerSOS() {
+          // Play Siren immediately
+          playSiren();
+
+          // Show Overlay
+          overlay.classList.add("active");
+          secondsLeft = 5;
+          countdownEl.textContent = secondsLeft;
+
+          countdownTimer = setInterval(() => {
+            secondsLeft--;
+            countdownEl.textContent = secondsLeft;
+
+            if (secondsLeft <= 0) {
+              clearInterval(countdownTimer);
+              executeEmergencyDispatch();
+            }
+          }, 1000);
+        }
+
+        function cancelSOS() {
+          clearInterval(countdownTimer);
+          stopSiren();
+          overlay.classList.remove("active");
+        }
+
+        function executeEmergencyDispatch() {
+          stopSiren();
+          overlay.classList.remove("active");
+
+          // 1. Build Location Link
+          let mapsLink = "Location Unavailable.";
+          if (currentLat && currentLng) {
+            mapsLink = `https://www.google.com/maps?q=${currentLat},${currentLng}`;
+          }
+
+          // 2. Fetch User Data (if exists from main app)
+          const savedData = localStorage.getItem("medilinkUser");
+          let uName = "A Patient";
+          let uProb = "a severe medical emergency";
+
+          if (savedData) {
+            try {
+              const parsed = JSON.parse(savedData);
+              if (parsed.name) uName = parsed.name;
+              if (parsed.problem) uProb = parsed.problem;
+            } catch (e) {}
+          }
+
+          // 3. Build Final Message
+          const message = `🚨 EMERGENCY SOS 🚨\nName: ${uName}\nCondition: ${uProb}\n\nI need immediate help! My exact location is:\n${mapsLink}`;
+
+          // 4. Smart Dispatch (Online vs Offline)
+          if (navigator.onLine) {
+            // Online -> Open WhatsApp
+            // Since we don't know the exact emergency number in advance, this opens contact picker
+            const waURL = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.location.href = waURL;
+          } else {
+            // Offline -> Native SMS App
+            // Universal SMS URI structure
+            const smsURL = `sms:?&body=${encodeURIComponent(message)}`;
+            window.location.href = smsURL;
+          }
+        }
+
+        // ==========================================
+        // 4. EVENT LISTENERS
+        // ==========================================
+        sosBtn.addEventListener("click", triggerSOS);
+        cancelBtn.addEventListener("click", cancelSOS);
+
+        // Nearby Hospitals Feature
+        hospitalsBtn.addEventListener("click", () => {
+          if (currentLat && currentLng) {
+            const url = `https://www.google.com/maps/search/hospitals+near+me/@${currentLat},${currentLng},14z`;
+            window.open(url, "_blank");
+          } else {
+            alert(
+              "Location is still fetching or permission was denied. Cannot find nearby hospitals accurately.",
+            );
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -29,6 +29,7 @@
         --primary-dark: #006666;
         --accent-mint: #f5fffa;
         --white: #ffffff;
+        --danger-color: #e63946;
         --text-main: #1a2b33;
         --text-muted: #5a717a;
         --bg-gradient: linear-gradient(135deg, #f5fffa 0%, #d8f0ea 100%);
@@ -76,6 +77,7 @@
       .text-muted {
         color: var(--text-muted);
       }
+
       .btn-primary,
       .btn-outline {
         padding: 0.7rem 1.5rem;
@@ -97,6 +99,7 @@
       .btn-primary:hover {
         background: var(--primary-dark);
         transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 128, 128, 0.3);
       }
       .btn-outline {
         background: transparent;
@@ -114,7 +117,7 @@
         position: sticky;
         top: 0;
         z-index: 1000;
-        background: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.85);
         backdrop-filter: blur(16px);
         border-bottom: 1px solid var(--glass-border);
         box-shadow: var(--glass-shadow);
@@ -165,7 +168,7 @@
 
       /* --- Filter Section --- */
       .filter-section {
-        padding: 8rem 0 3rem;
+        padding: 6rem 0 3rem;
         text-align: center;
       }
       .filter-section h1 {
@@ -242,19 +245,19 @@
         margin-bottom: 1.5rem;
       }
 
-      /* --- Modal Styling --- */
+      /* --- UPDATED: Modal Styling --- */
       .modal-overlay {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100vh;
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.5);
         backdrop-filter: blur(8px);
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 9999;
+        z-index: 99999;
         opacity: 0;
         pointer-events: none;
         transition: var(--transition-smooth);
@@ -264,14 +267,14 @@
         pointer-events: auto;
       }
       .modal-content {
-        background: var(--glass-bg);
+        background: rgba(255, 255, 255, 0.95);
         border: 1px solid var(--glass-border);
         border-radius: 24px;
         padding: 3rem 2rem;
         width: 90%;
-        max-width: 500px;
+        max-width: 450px;
         text-align: center;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
         transform: scale(0.8);
         transition: var(--transition-smooth);
         position: relative;
@@ -279,18 +282,35 @@
       .modal-overlay.active .modal-content {
         transform: scale(1);
       }
-      .close-modal {
+
+      /* Robust Close Button */
+      .close-btn {
         position: absolute;
         top: 15px;
         right: 20px;
         font-size: 1.8rem;
-        cursor: pointer;
+        background: none;
+        border: none;
         color: var(--text-muted);
-        transition: 0.3s;
+        cursor: pointer;
+        transition: 0.3s ease;
+        padding: 8px;
+        z-index: 10;
+        pointer-events: auto;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
       }
-      .close-modal:hover {
+      .close-btn:hover {
         color: var(--danger-color);
+        transform: scale(1.15);
+        background: rgba(230, 57, 70, 0.08);
       }
+
       .modal-doc-name {
         font-size: 1.8rem;
         margin: 1rem 0 0.5rem;
@@ -312,6 +332,7 @@
       .btn-whatsapp:hover {
         background: #1ebe57;
         transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
       }
 
       /* Animations */
@@ -324,9 +345,6 @@
 
       /* --- Mobile Responsiveness --- */
       @media screen and (max-width: 768px) {
-        .filter-section {
-          padding: 6rem 0 2rem;
-        }
         .filter-section h1 {
           font-size: 2rem;
         }
@@ -440,10 +458,14 @@
       </section>
     </main>
 
-    <!-- ================= MODAL PROFILE ================= -->
-    <div id="doctor-modal" class="modal-overlay">
+    <!-- ================= UPDATED MODAL PROFILE ================= -->
+    <div id="doctor-popup" class="modal-overlay" aria-hidden="true">
       <div class="modal-content">
-        <i class="fa-solid fa-xmark close-modal" id="close-modal"></i>
+        <!-- Robust Close Button -->
+        <button class="close-btn" id="close-popup" aria-label="Close modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
         <div class="doc-icon mx-auto" style="margin: 0 auto">
           <i class="fa-solid fa-user-doctor"></i>
         </div>
@@ -461,6 +483,7 @@
           <i class="fa-solid fa-location-dot"></i> Location
         </p>
 
+        <!-- WhatsApp Button -->
         <button id="wa-btn" class="btn-primary btn-whatsapp">
           <i class="fa-brands fa-whatsapp fa-lg"></i> Contact via WhatsApp
         </button>
@@ -746,51 +769,45 @@
         const grid = document.getElementById("doctor-grid");
         const filterSelect = document.getElementById("specialty-filter");
 
-        const modal = document.getElementById("doctor-modal");
-        const closeModal = document.getElementById("close-modal");
-        const mName = document.getElementById("modal-name");
-        const mSpec = document.getElementById("modal-specialty");
-        const mDeg = document.getElementById("modal-degree");
-        const mExp = document.getElementById("modal-exp");
-        const mLoc = document.getElementById("modal-loc");
+        const popupModal = document.getElementById("doctor-popup");
+        const closeBtn = document.getElementById("close-popup");
         const waBtn = document.getElementById("wa-btn");
 
-        let currentDoctorName = ""; // Store for WhatsApp
+        let selectedDoctor = null; // Store selected doctor globally
 
         // =====================================
         // 3. RENDER DOCTORS LOGIC
         // =====================================
         function displayDoctors(docs) {
-          grid.innerHTML = ""; // Clear existing
+          grid.innerHTML = "";
           if (docs.length === 0) {
             grid.innerHTML = `<h3 class="text-muted" style="grid-column: 1/-1;">No doctors found.</h3>`;
             return;
           }
 
           docs.forEach((doc, index) => {
-            // Add animation delay for staggered fade-in effect
             const delay = index * 0.05;
             const card = document.createElement("div");
             card.className = "doctor-card";
             card.style.animationDelay = `${delay}s`;
 
             card.innerHTML = `
-            <div class="doc-icon"><i class="fa-solid fa-user-doctor"></i></div>
-            <h3 class="doc-name">${doc.name}</h3>
-            <p class="doc-specialty">${doc.specialty}</p>
-            <button class="btn-outline view-profile-btn" data-id="${doc.id}" data-bn="প্রোফাইল দেখুন">View Profile</button>
-          `;
+              <div class="doc-icon"><i class="fa-solid fa-user-doctor"></i></div>
+              <h3 class="doc-name">${doc.name}</h3>
+              <p class="doc-specialty">${doc.specialty}</p>
+              <button class="btn-outline view-profile-btn" data-id="${doc.id}" data-bn="প্রোফাইল দেখুন">View Profile</button>
+            `;
             grid.appendChild(card);
           });
 
-          attachProfileListeners(); // Attach click events to new buttons
-          applyLanguage(localStorage.getItem("medilinkLang") || "en"); // Apply lang to new cards
+          attachProfileListeners();
+          applyLanguage(localStorage.getItem("medilinkLang") || "en");
         }
 
         // Initial Load
         displayDoctors(doctors);
 
-        // Filter Logic
+        // Filter Dropdown
         filterSelect.addEventListener("change", (e) => {
           const selected = e.target.value;
           if (selected === "All") {
@@ -804,60 +821,89 @@
         });
 
         // =====================================
-        // 4. MODAL & WHATSAPP LOGIC
+        // 4. MODAL & WHATSAPP LOGIC FIXES
         // =====================================
+
+        // Open Modal
         function attachProfileListeners() {
           const buttons = document.querySelectorAll(".view-profile-btn");
           buttons.forEach((btn) => {
             btn.addEventListener("click", (e) => {
               const docId = parseInt(e.target.getAttribute("data-id"));
-              const doc = doctors.find((d) => d.id === docId);
+              selectedDoctor = doctors.find((d) => d.id === docId);
 
-              if (doc) {
-                mName.innerText = doc.name;
-                mSpec.innerText = doc.specialty;
-                mDeg.innerText = doc.degree;
-                mExp.innerText = `Experience: ${doc.exp}`;
-                mLoc.innerHTML = `<i class="fa-solid fa-location-dot"></i> ${doc.loc}`;
+              if (selectedDoctor) {
+                document.getElementById("modal-name").innerText =
+                  selectedDoctor.name;
+                document.getElementById("modal-specialty").innerText =
+                  selectedDoctor.specialty;
+                document.getElementById("modal-degree").innerText =
+                  selectedDoctor.degree;
+                document.getElementById("modal-exp").innerText =
+                  `Experience: ${selectedDoctor.exp}`;
+                document.getElementById("modal-loc").innerHTML =
+                  `<i class="fa-solid fa-location-dot"></i> ${selectedDoctor.loc}`;
 
-                currentDoctorName = doc.name; // Save for WA logic
-                modal.classList.add("active");
+                popupModal.classList.add("active");
+                popupModal.setAttribute("aria-hidden", "false");
+                document.body.style.overflow = "hidden";
               }
             });
           });
         }
 
-        closeModal.addEventListener("click", () =>
-          modal.classList.remove("active"),
-        );
-        modal.addEventListener("click", (e) => {
-          if (e.target === modal) modal.classList.remove("active"); // Click outside to close
+        // Close Modal Logic (Bulletproof)
+        const closeModal = () => {
+          popupModal.classList.remove("active");
+          popupModal.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+        };
+
+        // 1. Click X button
+        closeBtn.addEventListener("click", closeModal);
+
+        // 2. Click outside the modal content
+        popupModal.addEventListener("click", (e) => {
+          if (e.target === popupModal) closeModal();
         });
 
-        // WhatsApp Button Logic
-        waBtn.addEventListener("click", () => {
-          // Fetch User Data from Intro Page (if it exists)
+        // 3. Press Escape Key
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && popupModal.classList.contains("active")) {
+            closeModal();
+          }
+        });
+
+        // Dynamic WhatsApp Integration Logic
+        waBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (!selectedDoctor) return;
+
+          // 1. Fetch User Data from Local Storage safely
           const savedData = localStorage.getItem("medilinkUser");
-          let uName = "Patient";
-          let uProb = "a medical condition";
+          let uName = "[Your Name]";
+          let uProb = "[Your Medical Issue]";
 
           if (savedData) {
-            const parsed = JSON.parse(savedData);
-            if (parsed.name) uName = parsed.name;
-            if (parsed.problem) uProb = parsed.problem;
+            try {
+              const parsed = JSON.parse(savedData);
+              if (parsed.name) uName = parsed.name;
+              if (parsed.problem) uProb = parsed.problem;
+            } catch (err) {
+              console.error("Local Storage Parsing Error:", err);
+            }
           }
 
-          // WhatsApp Number provided by user
+          // 2. Format the message properly
           const waNumber = "8801811389672";
+          const message = `Hello Doctor ${selectedDoctor.name} (${selectedDoctor.specialty}), I want to book an appointment.\n\nI am ${uName}. My problem is: ${uProb}. Please help.`;
 
-          // Exact Format requested
-          const message = `Hello Doctor ${currentDoctorName}, I am ${uName}. My problem is: ${uProb}. Please help.`;
-
-          // Create the encoded URL
+          // 3. Build the WhatsApp URL with encoded message
           const waURL = `https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`;
 
-          // Open WhatsApp in new tab
-          window.open(waURL, "_blank");
+          // 4. Redirect via location for max compatibility (avoids popup blockers)
+          window.open(waURL, "_blank", "noopener,noreferrer");
         });
 
         // =====================================
@@ -906,7 +952,7 @@
             localStorage.setItem("medilinkLang", currentLang);
             applyLanguage(currentLang);
 
-            // Force update dropdown translation trick
+            // Update dropdown dynamically
             if (currentLang === "bn") {
               filterSelect.options[0].text = "সকল বিশেষজ্ঞ";
             } else {
